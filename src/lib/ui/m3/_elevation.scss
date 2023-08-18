@@ -1,0 +1,54 @@
+@use 'sass:map';
+
+$key-opacity: 0.3 !default;
+$ambient-opacity: 0.15 !default;
+
+$key-map: (
+  0: '0px 0px 0px 0px',
+  1: '0px 1px 2px 0px',
+  2: '0px 1px 2px 0px',
+  3: '0px 1px 3px 0px',
+  4: '0px 2px 3px 0px',
+  5: '0px 4px 4px 0px'
+) !default;
+
+$ambient-map: (
+  0: '0px 0px 0px 0px',
+  1: '0px 1px 3px 1px',
+  2: '0px 2px 6px 2px',
+  3: '0px 4px 8px 3px',
+  4: '0px 6px 10px 4px',
+  5: '0px 8px 12px 6px'
+) !default;
+
+@mixin element() {
+  &,
+  &::before,
+  &::after {
+    box-sizing: content-box;
+    border-radius: inherit;
+    inset: 0;
+    position: absolute;
+    transition-duration: inherit;
+    transition-timing-function: inherit;
+    content: '';
+    transition-property: box-shadow, opacity;
+    pointer-events: none;
+  }
+}
+
+@mixin elevation($level) {
+  @if $level < 0 or $level > 5 {
+    @error "$level must be between 0 and 5, but received '#{$level}'";
+  }
+
+  &::before {
+    box-shadow: #{map.get($key-map, $level)} var(--mdc-theme-shadow);
+    opacity: $key-opacity;
+  }
+
+  &::after {
+    box-shadow: #{map.get($ambient-map, $level)} var(--mdc-theme-shadow);
+    opacity: $ambient-opacity;
+  }
+}

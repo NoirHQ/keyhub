@@ -1,0 +1,26 @@
+.mdc-top-app-bar {
+  background-color: var(--mdc-theme-surface);
+  color: var(--mdc-theme-on-surface);
+
+  .mdc-top-app-bar__row {
+    height: 64px;
+  }
+
+  .mdc-top-app-bar__action-item,
+  .mdc-top-app-bar__navigation-icon {
+    color: var(--mdc-theme-on-surface);
+  }
+}
+
+.mdc-top-app-bar__title {
+  padding-left: 4px;
+}
+
+.mdc-top-app-bar--fixed-scrolled {
+  background-color: var(--mdc-theme-surface-container);
+}
+
+.mdc-top-app-bar--fixed-adjust {
+  background-color: var(--mdc-theme-surface);
+  color: var(--mdc-theme-on-surface);
+}

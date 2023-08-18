@@ -1,0 +1,84 @@
+{
+  "common": {
+    "cancel": "취소",
+    "confirm": "확인",
+    "email": "이메일",
+    "login": "로그인",
+    "signup": "회원가입",
+    "next": "다음"
+  },
+  "errors": {
+    "email_already_exists": "이미 가입한 이메일입니다",
+    "email_not_found": "존재하지 않는 이메일입니다",
+    "email_required": "이메일을 입력해주세요",
+    "login_failed": "로그인에 실패했습니다",
+    "invalid_access": "잘못된 접근입니다",
+    "invalid_email_format": "이메일 형식이 올바르지 않습니다",
+    "signup_request_failed": "가입 요청이 실패했습니다",
+    "lookup_credential_failed": "사용자 조회에 실패하였습니다"
+  },
+  "page": {
+    "main": {
+      "entry": {
+        "header": "Open the door to Web 3.0"
+      },
+      "id": {
+        "new_passkey": "새 Passkey",
+        "set_passkey_name": "기억하기 쉽게 Passkey 별칭을 입력하세요.",
+        "passkey_name": "Passkey 이름",
+        "primary_key": "기본 키",
+        "created_at": "생성 시점",
+        "last_used_at": "마지막 사용 시점"
+      },
+      "menu": {
+        "wallet": "지갑",
+        "id": "Key ID",
+        "apps": "앱",
+        "settings": "설정"
+      },
+      "settings": {
+        "appearance": "화면 모드",
+        "theme": "테마",
+        "light": "라이트 모드",
+        "logout": "로그아웃",
+        "dark": "다크 모드",
+        "system": "자동"
+      }
+    },
+    "login": {
+      "preheader": "Keyhub 계정으로 로그인",
+      "header": "로그인",
+      "subheader": "{target}(으)로 이동",
+      "rememberme": "로그인 상태 유지",
+      "description": "비밀번호 없이 쉽고 안전하게 로그인하세요.",
+      "signup": "계정 만들기",
+      "signup_success": "가입을 완료했습니다"
+    },
+    "signup": {
+      "header": "Keyhub 계정 만들기",
+      "subheader": "이메일을 입력하세요",
+      "confirm_username": "{username}(으)로 가입합니다",
+      "confirm_email_verification": "메일함에서 인증메일을 확인해주세요",
+      "confirm_success": "인증완료",
+      "confirm_failed": "인증에 실패했습니다",
+      "signup_failed": "가입에 실패했습니다",
+      "advanced_options": "고급사용자용 옵션",
+      "use_security_key": "하드웨어 키 사용",
+      "use_security_key_description": "YubiKey 등 별도의 하드웨어 키 사용시 선택하세요",
+      "description_not_mobile": "휴대폰을 통해 가입하지 않으면 다른 기기에서 로그인 할 수 없습니다. Android 9+ (Chrome) 또는 iOS 16+ (Chrome, Safari) 기기를 사용해 가입해주세요.",
+      "description_encrypted_email": "이메일은 중복 가입을 방지하기 위한 용도로만 사용하며 암호화하여 저장하므로 Keyhub 관리자도 알 수 없습니다.",
+      "description_confirm_next": "다음을 눌러 Passkey를 생성하고 회원가입을 완료하세요."
+    },
+    "sign": {
+      "header": "전송하기",
+      "preheader": "Keyhub 계정으로 전송",
+      "subheader": "처리할 트랜잭션을 확인해주세요",
+      "message": "정상적으로 전송되었습니다.",
+      "chain": "체인",
+      "account": "사용자",
+      "rpc": "요청대상",
+      "call": "요청내용",
+      "params": "추가정보"
+    }
+  }
+}

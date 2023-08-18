@@ -1,0 +1,10 @@
+@use './typography' as typography;
+
+.mdc-deprecated-list-item__text {
+  @include typography.body-large;
+  color: var(--mdc-theme-on-surface);
+}
+
+.mdc-deprecated-list-item__meta {
+  color: var(--mdc-theme-on-surface);
+}

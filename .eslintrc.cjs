@@ -7,7 +7,7 @@ module.exports = {
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'import'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2020,
@@ -28,6 +28,21 @@ module.exports = {
     }
   ],
   rules: {
-    indent: ['error', 2]
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'import/order': [
+      'error',
+      {
+        groups: ['type', 'builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true
+        },
+        'newlines-between': 'never'
+      }
+    ],
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/prefer-default-export': 'off',
+    'import/no-useless-path-segments': ['error', { noUselessIndex: true }]
   }
 };

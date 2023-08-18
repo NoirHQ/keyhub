@@ -1,0 +1,26 @@
+@use './typography' as typography;
+
+.mdc-snackbar {
+  color: var(--mdc-theme-inverse-on-surface);
+}
+
+.mdc-snackbar__surface {
+  background-color: var(--mdc-theme-inverse-surface);
+  border-radius: 4px;
+}
+
+.mdc-snackbar__label {
+  @include typography.body-medium;
+
+  color: var(--mdc-theme-inverse-on-surface);
+}
+
+.mdc-snackbar__actions {
+  .mdc-button {
+    color: var(--mdc-theme-inverse-primary);
+  }
+
+  .mdc-icon-button {
+    color: var(--mdc-theme-inverse-on-surface);
+  }
+}

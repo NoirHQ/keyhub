@@ -1,0 +1,30 @@
+.mdc-checkbox {
+  --mdc-checkbox-unchecked-color: var(--mdc-theme-on-surface);
+  --mdc-checkbox-checked-color: var(--mdc-theme-primary);
+  --mdc-checkbox-ink-color: var(--mdc-theme-on-primary);
+
+  .mdc-checkbox__ripple::before {
+    background-color: var(--mdc-theme-on-surface);
+  }
+  .mdc-checkbox__ripple::after {
+    background-color: var(--mdc-theme-on-surface);
+  }
+}
+
+.mdc-checkbox.mdc-checkbox--selected {
+  .mdc-checkbox__ripple::before {
+    background-color: var(--mdc-theme-primary);
+  }
+  .mdc-checkbox__ripple::after {
+    background-color: var(--mdc-theme-primary);
+  }
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background {
+  background-color: var(--mdc-theme-primary);
+  border-width: 0;
+}
+
+.mdc-checkbox__checkmark {
+  transform: scale(0.67);
+}

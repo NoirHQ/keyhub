@@ -1,0 +1,20 @@
+.mdc-fab:not(.mdc-fab--extended) {
+  background-color: var(--mdc-theme-primary-container);
+  border-radius: 12px;
+
+  .mdc-fab__ripple {
+    border-radius: inherit;
+
+    &:before,
+    &:after {
+      background-color: var(--mdc-theme-on-primary-container);
+      border-radius: inherit;
+    }
+  }
+}
+
+.mdc-fab:not(:disabled) .mdc-fab__icon {
+  color: var(--mdc-theme-on-primary-container);
+  width: 24px;
+  height: 24px;
+}

@@ -1,0 +1,84 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "email": "Email",
+    "login": "Login",
+    "signup": "Sign up",
+    "next": "Next"
+  },
+  "errors": {
+    "email_already_exists": "This email has already been used",
+    "email_not_found": "No user found with this email",
+    "email_required": "Enter your email",
+    "login_failed": "Login failed",
+    "invalid_access": "Access denied",
+    "invalid_email_format": "Invalid email format",
+    "signup_request_failed": "Failed to sign up",
+    "lookup_credential_failed": "Failed to look up user"
+  },
+  "page": {
+    "main": {
+      "entry": {
+        "header": "Open the door to Web 3.0"
+      },
+      "id": {
+        "new_passkey": "New Passkey",
+        "set_passkey_name": "Set an alias of Passkey for easy identification.",
+        "passkey_name": "Passkey Name",
+        "primary_key": "Primary Key",
+        "created_at": "Created at",
+        "last_used_at": "Last used at"
+      },
+      "menu": {
+        "wallet": "Wallet",
+        "id": "Key ID",
+        "apps": "Apps",
+        "settings": "Settings"
+      },
+      "settings": {
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "light": "Light",
+        "logout": "Logout",
+        "dark": "Dark",
+        "system": "System"
+      }
+    },
+    "login": {
+      "preheader": "Login via Keyhub",
+      "header": "Login",
+      "subheader": "Continue to {target}",
+      "rememberme": "Keep me logged in",
+      "description": "Easy and secure login without passwords",
+      "signup": "Create account",
+      "signup_success": "You have successfully signed up"
+    },
+    "signup": {
+      "header": "Create Your Keyhub account",
+      "subheader": "Enter your email",
+      "confirm_username": "Continue signing up with {username}",
+      "confirm_email_verification": "Confirm verification email in your inbox",
+      "confirm_success": "Confirm",
+      "confirm_failed": "Email verification failed",
+      "signup_failed": "Failed to sign up",
+      "advanced_options": "Advanced Options",
+      "use_security_key": "Use security key",
+      "use_security_key_description": "Check this option to use an external key such as YubiKey",
+      "description_not_mobile": "If you don't sign up using your phone, you won't be able to login from another device. Please sign up using Android 9+ (Chrome) or iOS 16+ (Chrome, Safari).",
+      "description_encrypted_email": "The email is only used to prevent duplicate signups and is stored encrypted, so even the Keyhub administrator does not have access to it.",
+      "description_confirm_next": "Click Next to generate your Passkey and complete the sign-up process."
+    },
+    "sign": {
+      "header": "Send",
+      "preheader": "Send via Keyhub",
+      "subheader": "Confirm the transaction to send",
+      "message": "Successfully sent.",
+      "chain": "Chain",
+      "account": "User",
+      "rpc": "Call Target",
+      "call": "Call Method",
+      "params": "Additional Params"
+    }
+  }
+}
