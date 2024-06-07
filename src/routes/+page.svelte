@@ -5,7 +5,7 @@
   import { onMount, onDestroy } from 'svelte';
   import Layout from './Layout.svelte';
   import { goto } from '$app/navigation';
-  import { Apps, Entry, Id, Settings, Wallet } from '$lib/pages';
+  import { Entry, Id, Settings, Wallet } from '$lib/pages';
   import { path } from '$lib/stores';
   import { timestamp } from '$lib/utils';
 
@@ -19,7 +19,8 @@
   let signers: WebAuthnSigner[] = [];
   let unsubs = [];
 
-  const BILLION = bnToBn(1000000000);
+  // ten trillion
+  const TENT = bnToBn('100000000000000');
 
   onMount(async () => {
     const cachedKeys = localStorage.getItem('keys');
@@ -77,10 +78,10 @@
       balances.push('-');
       unsubs.push(
         await api.query.system.account(addressRaw, ({ data: { free } }) => {
-          balances[i] = bnToBn(free.toHex())
-            .div(BILLION)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          balances[i] = (parseInt(bnToBn(free.toHex()).div(TENT).toString()) / 10000).toLocaleString(
+            'en-US',
+            { minimumFractionDigits: 4, maximumFractionDigits: 4 }
+          );
         })
       );
     }
@@ -126,16 +127,14 @@
 
 <Layout>
   {#if $path.startsWith('/wallet')}
-    <Wallet bind:api bind:accounts bind:balances bind:signers {removeAccount} data={data?.wallet} />
+    <Wallet {api} {accounts} {balances} {signers} {removeAccount} data={data?.wallet} />
   {:else if $path.startsWith('/id')}
-    <Id bind:keys />
+    <Id {keys} />
   {:else}
     <div class="content-wrapper">
       <div class="content">
         {#if $path.startsWith('/entry')}
           <Entry />
-        {:else if $path.startsWith('/apps')}
-          <Apps />
         {:else if $path.startsWith('/settings')}
           <Settings />
         {/if}

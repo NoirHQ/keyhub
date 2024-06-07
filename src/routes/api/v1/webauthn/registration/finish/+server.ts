@@ -1,5 +1,6 @@
 import type { User, Key } from '$server/v1/types/types.server';
 import { p256 } from '@noble/curves/p256';
+import { blake2AsU8a, encodeAddress } from '@polkadot/util-crypto';
 import {
   verifyRegistrationResponse,
   type VerifiedRegistrationResponse
@@ -35,8 +36,9 @@ export async function POST({ request }) {
 
     const publicKey = p256.ProjectivePoint.fromHex(
       '04' + x.toString('hex') + y.toString('hex')
-    ).toHex(true);
-    const universalAddress = `u${Buffer.from(`8024${publicKey}`, 'hex').toString('base64url')}`;
+    ).toRawBytes(true);
+    const accountId = encodeAddress(blake2AsU8a(publicKey));
+
     let verification: VerifiedRegistrationResponse;
     try {
       verification = await verifyRegistrationResponse({
@@ -69,7 +71,7 @@ export async function POST({ request }) {
     };
     const createdKey: Key = {
       user_id: userId,
-      public_key: universalAddress,
+      public_key: accountId,
       credential_id: Buffer.from(credentialID).toString('base64url'),
       cred: JSON.stringify(authenticator),
       is_primary: true,

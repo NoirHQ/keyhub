@@ -22,7 +22,8 @@ export async function POST({ request }) {
       userDisplayName: username,
       authenticatorSelection: {
         requireResidentKey
-      }
+      },
+      supportedAlgorithmIDs: [-7],
     });
 
     user.set(username);

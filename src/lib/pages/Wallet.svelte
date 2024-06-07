@@ -4,8 +4,8 @@
   import type { Account } from '$lib/types';
   import type { IconName } from '$lib/ui/icon';
   import type { ApiPromise, WebAuthnSigner } from '@pinot/api';
-  import { bnToBn, hexToU8a, u8aConcat, u8aToBase64url } from '@pinot/util';
-  import { blake2AsU8a } from '@polkadot/util-crypto';
+  import { bnToBn, hexToU8a, u8aConcat } from '@pinot/util';
+  import { blake2AsU8a, encodeAddress } from '@polkadot/util-crypto';
   import Fab from '@smui/fab';
   import Textfield from '@smui/textfield';
   import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
@@ -59,7 +59,8 @@
   let to = data?.to ?? '';
   let amount = data?.amount ?? '';
 
-  const BILLION = bnToBn(1000000000);
+  // ten trillion
+  const TENT = bnToBn('100000000000000');
 
   /**
    * onClick handler for confirm button in send page.
@@ -67,17 +68,21 @@
   async function confirmTransfer() {
     let resolved = to;
     if (to.startsWith('0x')) {
-      const address = await api.query.accountAliasRegistry.accountAliases({ EthereumAddress: to });
+      const address = await api.query.alias.accountIdOf({ EthereumAddress: to });
       if (!address || address.toHex() === '0x') {
         let u8a = blake2AsU8a(u8aConcat(Uint8Array.from([0x65, 0x76, 0x6d, 0x3a]), hexToU8a(to)));
-        u8a = u8aConcat(Uint8Array.from([0xa0, 0xe4, 0x02, 0x20]), u8a);
-        resolved = 'u' + u8aToBase64url(u8a);
+        resolved = encodeAddress(u8a);
       } else {
-        resolved = 'u' + u8aToBase64url(address.toU8a(true));
+        resolved = encodeAddress(address);
       }
     }
     await api.tx.balances
-      .transfer(resolved, bnToBn(amount).mul(BILLION).toString())
+      .transferKeepAlive(
+        resolved,
+        bnToBn((parseFloat(amount) * 10000).toFixed(0))
+          .mul(TENT)
+          .toString()
+      )
       .signAndSend(signers[active].address, { signer: signers[active] });
     to = '';
     amount = '';
@@ -218,7 +223,7 @@
                   </div>
                   <div class="card__content">
                     <div class="amount">{balances[i] ?? '-'}</div>
-                    <div class="unit">nCDT</div>
+                    <div class="unit">CDT</div>
                   </div>
                 </button>
               </SplideSlide>
@@ -245,10 +250,10 @@
             bind:value={amount}
             label="Amount"
             style="margin-top: 12px;"
-            suffix="nCDT"
-            input$inputmode="numeric"
+            suffix="CDT"
+            input$inputmode="decimal"
             type="text"
-            input$pattern="[0-9]*"
+            input$pattern="([0-9]*|[0-9]+\.[0-9]*)"
           >
             <Icon smui="textfield" name="price_change" variant="rounded" slot="leadingIcon" />
           </Textfield>
@@ -283,6 +288,9 @@
       <div class="reader-container">
         <div id="reader" />
       </div>
+      {#if context === 'read'}
+        <Button on:click={() => setContext('send')}>input recipient</Button>
+      {/if}
       {#if context === 'remv'}
         <div class="button-container">
           <Button variant="filled" class="button-error" on:click={() => removeCard()}>
@@ -363,6 +371,7 @@
     color: var(--mdc-theme-on-surface);
     width: 54px;
     height: 54px;
+    cursor: default;
   }
 
   .network-selector__icon {
