@@ -78,10 +78,9 @@
       balances.push('-');
       unsubs.push(
         await api.query.system.account(addressRaw, ({ data: { free } }) => {
-          balances[i] = (parseInt(bnToBn(free.toHex()).div(TENT).toString()) / 10000).toLocaleString(
-            'en-US',
-            { minimumFractionDigits: 4, maximumFractionDigits: 4 }
-          );
+          balances[i] = (
+            parseInt(bnToBn(free.toHex()).div(TENT).toString()) / 10000
+          ).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
         })
       );
     }
