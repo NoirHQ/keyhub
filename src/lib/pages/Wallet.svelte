@@ -59,8 +59,7 @@
   let to = data?.to ?? '';
   let amount = data?.amount ?? '';
 
-  // ten trillion
-  const TENT = bnToBn('100000000000000');
+  const TEN_TRILLION = bnToBn('100000000000000');
 
   /**
    * onClick handler for confirm button in send page.
@@ -80,7 +79,7 @@
       .transferKeepAlive(
         resolved,
         bnToBn((parseFloat(amount) * 10000).toFixed(0))
-          .mul(TENT)
+          .mul(TEN_TRILLION)
           .toString()
       )
       .signAndSend(signers[active].address, { signer: signers[active] });

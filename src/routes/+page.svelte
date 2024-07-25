@@ -19,8 +19,7 @@
   let signers: WebAuthnSigner[] = [];
   let unsubs = [];
 
-  // ten trillion
-  const TENT = bnToBn('100000000000000');
+  const TEN_TRILLION = bnToBn('100000000000000');
 
   onMount(async () => {
     const cachedKeys = localStorage.getItem('keys');
@@ -79,7 +78,7 @@
       unsubs.push(
         await api.query.system.account(addressRaw, ({ data: { free } }) => {
           balances[i] = (
-            parseInt(bnToBn(free.toHex()).div(TENT).toString()) / 10000
+            parseInt(bnToBn(free.toHex()).div(TEN_TRILLION).toString()) / 10000
           ).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
         })
       );
