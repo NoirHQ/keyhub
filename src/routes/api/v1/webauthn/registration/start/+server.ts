@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 import { WEBAUTHN_RP_ID, WEBAUTHN_RP_NAME } from '$server/libs/config.server';
 import { filedb } from '$server/libs/filedb.server';
 import { challenge, user, uuid } from '$server/libs/stores.server';
+import { COSEAlgorithm } from '$server/v1/types/types.server';
 
 export async function POST({ request }) {
   try {
@@ -23,7 +24,7 @@ export async function POST({ request }) {
       authenticatorSelection: {
         requireResidentKey
       },
-      supportedAlgorithmIDs: [-7]
+      supportedAlgorithmIDs: [COSEAlgorithm.EdDSA, COSEAlgorithm.ES256]
     });
 
     user.set(username);

@@ -11,7 +11,25 @@ import { get } from 'svelte/store';
 import { WEBAUTHN_RP_ID, WEBAUTHN_RP_ORIGIN } from '$server/libs/config.server';
 import { filedb } from '$server/libs/filedb.server';
 import { challenge, user, uuid } from '$server/libs/stores.server';
-import { Authenticator } from '$server/v1/types/types.server';
+import { Authenticator, COSEAlgorithm } from '$server/v1/types/types.server';
+
+function getAccountId(publicKeyBytes: Buffer): string {
+  const publicKeyObject = cbor.decode(publicKeyBytes);
+  const algorithm = publicKeyObject.get(3);
+  if (algorithm === COSEAlgorithm.ES256) {
+    const x = publicKeyObject.get(-2);
+    const y = publicKeyObject.get(-3);
+    const publicKey = p256.ProjectivePoint.fromHex(
+      '04' + x.toString('hex') + y.toString('hex')
+    ).toRawBytes(true);
+    return encodeAddress(blake2AsU8a(publicKey));
+  } else if (algorithm === COSEAlgorithm.EdDSA) {
+    const publicKey = publicKeyObject.get(-2);
+    return encodeAddress(publicKey);
+  } else {
+    throw new Error('unsupported algorithm', { cause: 'WEBAUTHN_CREATION_ERROR' });
+  }
+}
 
 export async function POST({ request }) {
   try {
@@ -30,14 +48,7 @@ export async function POST({ request }) {
     const credentialIdLength = Buffer.from(authData.slice(53, 55)).readUint16BE();
 
     const publicKeyBytes = authData.slice(55 + credentialIdLength);
-    const publicKeyObject = cbor.decode(publicKeyBytes);
-    const x = publicKeyObject.get(-2);
-    const y = publicKeyObject.get(-3);
-
-    const publicKey = p256.ProjectivePoint.fromHex(
-      '04' + x.toString('hex') + y.toString('hex')
-    ).toRawBytes(true);
-    const accountId = encodeAddress(blake2AsU8a(publicKey));
+    const accountId = getAccountId(publicKeyBytes);
 
     let verification: VerifiedRegistrationResponse;
     try {

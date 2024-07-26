@@ -44,3 +44,10 @@ export interface Key {
   updated_at: Date;
   last_used_at?: Date;
 }
+
+export const COSEAlgorithm = {
+  ES256: -7,
+  EdDSA: -8
+} as const;
+
+export type COSEAlgorithmIdentifier = typeof COSEAlgorithm[keyof typeof COSEAlgorithm];
