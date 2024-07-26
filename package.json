@@ -1,6 +1,6 @@
 {
   "name": "keyhub",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "dev": "vite dev",
@@ -18,8 +18,9 @@
     "@github/webauthn-json": "^2.1.1",
     "@material/material-color-utilities": "^0.2.6",
     "@noble/curves": "^1.1.0",
-    "@pinot/api": "^0.1.0",
-    "@pinot/util": "^0.1.2",
+    "@pinot/api": "^0.3.1",
+    "@pinot/util": "^0.3.0",
+    "@polkadot/util-crypto": "^12.6.2",
     "@simplewebauthn/server": "^7.4.0",
     "@simplewebauthn/typescript-types": "^7.4.0",
     "@smui/button": "^7.0.0-beta.14",
@@ -49,6 +50,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-svelte": "^2.32.4",
     "html5-qrcode": "^2.3.8",
+    "intl-messageformat": "^10.5.14",
     "prettier": "^2.8.0",
     "prettier-plugin-svelte": "^2.8.1",
     "smui-theme": "^7.0.0-beta.0",

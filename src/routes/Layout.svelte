@@ -24,11 +24,6 @@
       path: '/id'
     },
     {
-      id: 'apps',
-      icon: 'apps',
-      path: '/apps'
-    },
-    {
       id: 'settings',
       icon: 'settings',
       path: '/settings'

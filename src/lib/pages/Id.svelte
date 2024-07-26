@@ -98,7 +98,7 @@
         {#each keys as key}
           <div class="card">
             <div class="key-container">
-              {'did:key:' + key.public_key}
+              {key.public_key}
             </div>
             <div class="key-desc">
               <div class="key-content-name">
